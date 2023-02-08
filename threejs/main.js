@@ -2,6 +2,7 @@ import "./style.css";
 import * as THREE from "three";
 import * as dat from "dat.gui";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import { SpotLightHelper } from "three";
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
@@ -56,17 +57,27 @@ sphere.castShadow = true;
 //light
 // const amibentLight = new THREE.AmbientLight(0x333333);
 // scene.add(amibentLight)
-const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 0.8);
-scene.add(directionalLight);
-directionalLight.position.set(-30, 30, 0);
-directionalLight.castShadow = true;
+
+// const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 0.8);
+// scene.add(directionalLight);
+// directionalLight.position.set(-30, 30, 0);
+// directionalLight.castShadow = true;
 
 
-const dLightHelper = new THREE.DirectionalLightHelper(directionalLight, 5);
-scene.add(dLightHelper);
+// const dLightHelper = new THREE.DirectionalLightHelper(directionalLight, 5);
+// scene.add(dLightHelper);
 
-const dLShadowHelper = new THREE.CameraHelper(directionalLight.shadow.camera);
-scene.add(dLShadowHelper)
+// const dLShadowHelper = new THREE.CameraHelper(directionalLight.shadow.camera);
+// scene.add(dLShadowHelper)
+
+const spotLight = new THREE.SpotLight(0xFFFFFF)
+scene.add(spotLight);
+spotLight.position.set(-100, 100, 0);
+spotLight.castShadow = true;
+spotLight.angle = 0.2
+
+const sLHelper = new THREE.SpotLightHelper(spotLight);
+scene.add(sLHelper)
 
 camera.position.set(-10, 30, 30);
 
